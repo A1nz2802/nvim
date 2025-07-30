@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-	theme = "onedark",
+	theme = "chadracula-evondev",
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
@@ -18,7 +18,6 @@ M.nvdash = { load_on_startup = true }
 M.ui = {
 	tabufline = {
 		lazyload = false,
-		order = { "buffers", "tabs", "btns" },
 	},
 	statusline = {
 		order = {
