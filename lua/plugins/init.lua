@@ -48,7 +48,7 @@ return {
     "zbirenbaum/copilot-cmp",
     event = { "InsertEnter", "LspAttach" },
     fix_pairs = true,
-    config = function ()
+    config = function()
       require("copilot_cmp").setup()
     end,
   },
@@ -92,7 +92,35 @@ return {
       },
     },
     lazy = false,
-  }
+  },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function()
+      require("noice").setup({
+        lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = { "regex", "bash" }, -- for noice plugin 
+    }
+  },
 
   --[[ {
     "saghen/blink.cmp",

@@ -13,6 +13,7 @@ local servers = {
   "nginx_language_server",
   "dockerls",
   
+  "bashls",
   "lua_ls",
   "ts_ls",
   "gopls",
