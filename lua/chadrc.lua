@@ -20,6 +20,49 @@ M.ui = {
 		lazyload = false,
 		order = { "buffers", "tabs", "btns" },
 	},
+	statusline = {
+		order = {
+      "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "copilot_status", "cwd", "cursor",
+		},
+		modules = {
+      lsp = function()
+        if rawget(vim, "lsp") then
+          for _, client in ipairs(vim.lsp.get_clients()) do
+            -- Si el cliente NO es copilot, lo procesamos
+            if client.name ~= "copilot" then
+              if client.attached_buffers[vim.api.nvim_get_current_buf()] then
+                return "%#St_Lsp#" .. (vim.o.columns > 100 and "   LSP ~ " .. client.name .. " ") or "   LSP "
+              end
+            end
+          end
+        end
+        return ""
+      end,
+			copilot_status = function()
+        local c = require("copilot.client") 
+        local s = require("copilot.status")
+
+        local is_current_buffer_attached = function()
+          return c.buf_is_attached(vim.api.nvim_get_current_buf())
+        end
+
+        if c.is_disabled() or not is_current_buffer_attached() then
+          return "%#St_Lsp#" .. "    "
+        end
+
+        local data = s.data.status
+        if data == 'InProgress' then
+          return "    "
+        elseif data == 'Warning' then
+          return "    "
+        elseif data == 'Connected' then
+          return "    "
+        end
+
+        return "    " 
+      end,
+		},
+	},
 }
 
 return M
