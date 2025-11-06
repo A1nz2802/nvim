@@ -19,7 +19,7 @@ local servers = {
   "gopls",
   "pyright",
   "rust_analyzer",
-
+  "clangd",
 }
 
 vim.lsp.config['yamlls'] = {

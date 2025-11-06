@@ -15,3 +15,13 @@ vim.api.nvim_create_autocmd("BufDelete", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "c", "cpp", "h", "hpp", "objc" },
+  desc = "Set 4-space indentation for C/C++ files",
+  callback = function()
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.tabstop = 4
+    vim.opt_local.expandtab = true
+  end,
+})

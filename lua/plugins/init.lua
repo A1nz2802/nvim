@@ -1,7 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -12,6 +12,18 @@ return {
       require "configs.lspconfig"
     end,
   },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = {
+      filters = {
+        dotfiles = false,
+        git_ignored = false,
+        custom = { "node_modules" },
+      },
+    },
+  },
+
 
   {
     "vyfor/cord.nvim",
@@ -36,19 +48,12 @@ return {
   },
 
   {
-    "zbirenbaum/copilot-cmp",
-    event = { "InsertEnter", "LspAttach" },
-    fix_pairs = true,
-    config = function()
-      require("copilot_cmp").setup()
-    end,
-  },
-
-  {
     "hrsh7th/nvim-cmp",
     dependencies = {
       {
         "zbirenbaum/copilot-cmp",
+        event = { "InsertEnter", "LspAttach" },
+        fix_pairs = true,
         config = function()
           require("copilot_cmp").setup()
         end,
@@ -121,7 +126,7 @@ return {
     ---@module 'avante'
     ---@type avante.Config
     opts = {
-      provider = "openai",
+      provider = "gemini",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com/v1/messages",
@@ -142,13 +147,13 @@ return {
           },
         },
         gemini = {
-          endpoint = "https://generativelanguage.googleapis.com/v1beta/models/",
-          model = "gemini-2.5-flash",
-          timeout = 30000,
+          --[[ endpoint = "https://generativelanguage.googleapis.com/v1beta/models/", ]]
+          model = "gemini-2.5-pro",
+          --[[ timeout = 30000,
           extra_request_body = {
             temperature = 0.7,
             max_tokens = 2048,
-          },
+          }, ]]
         },
       },
     },
@@ -181,16 +186,28 @@ return {
           },
         },
       },
-    {
-      -- Make sure to set this up properly if you have lazy=true
-      'MeanderingProgrammer/render-markdown.nvim',
-      opts = {
-        file_types = { "markdown", "Avante" },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
       },
-      ft = { "markdown", "Avante" },
     },
   },
-  }
+
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install --no-audit",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+      vim.g.mkdp_browser = 'brave'
+      vim.g.mkdp_auto_close = 0
+    end,
+    ft = { "markdown" },
+  },
 
   --[[ {
     "saghen/blink.cmp",
