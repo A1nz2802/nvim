@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-	theme = "github_dark",
+	theme = "kanagawa",
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
@@ -30,7 +30,7 @@ M.ui = {
           for _, client in ipairs(vim.lsp.get_clients()) do
             if client.name ~= "copilot" then
               if client.attached_buffers[vim.api.nvim_get_current_buf()] then
-                return "%#St_Lsp#" .. (vim.o.columns > 100 and "   LSP ~ " .. client.name .. " ") or "   LSP "
+                return "%#St_Lsp#" .. (vim.o.columns > 100 and "   LSP ~ " .. client.name .. " " or "   LSP ")
               end
             end
           end
