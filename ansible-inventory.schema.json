@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ansible Inventory",
+  "description": "Ansible inventory with recursive group and host definitions.",
+  "type": "object",
+  "definitions": {
+    "hostVars": {
+      "type": ["object", "null"],
+      "properties": {
+        "ansible_connection": {
+          "type": "string",
+          "description": "Connection plugin used for the host."
+        },
+        "ansible_network_os": {
+          "type": "string",
+          "description": "Network platform identifier used by Ansible network collections."
+        },
+        "ansible_host": { "type": "string" },
+        "ansible_user": { "type": "string" },
+        "ansible_port": { "type": ["integer", "string"] },
+        "ansible_become": { "type": ["boolean", "string"] },
+        "ansible_become_method": { "type": "string" },
+        "ansible_become_user": { "type": "string" },
+        "ansible_ssh_private_key_file": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "group": {
+      "type": ["object", "null"],
+      "properties": {
+        "children": {
+          "type": ["object", "null"],
+          "additionalProperties": { "$ref": "#/definitions/group" }
+        },
+        "groups": {
+          "type": ["object", "null"],
+          "additionalProperties": { "$ref": "#/definitions/group" }
+        },
+        "hosts": {
+          "type": ["object", "null"],
+          "additionalProperties": { "$ref": "#/definitions/hostVars" }
+        },
+        "vars": { "$ref": "#/definitions/hostVars" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "properties": {
+    "all": { "$ref": "#/definitions/group" },
+    "ungrouped": { "$ref": "#/definitions/group" }
+  },
+  "additionalProperties": { "$ref": "#/definitions/group" }
+}
