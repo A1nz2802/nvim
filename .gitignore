@@ -1,0 +1,35 @@
+# Neovim temporary files
+*.swp
+*.swo
+*~
+.netrwhist
+plugin/packer_compiled.lua
+
+# Local editor and tool state
+.cache/
+.luacov*
+.neoconf.json
+.luarc.json
+.luarc.jsonc
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.venv/
+venv/
+htmlcov/
+.coverage
+.coverage.*
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
