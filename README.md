@@ -2,6 +2,8 @@
 
 A personal Neovim setup built on [NvChad](https://github.com/NvChad/NvChad), with plugins managed by `lazy.nvim`. It uses the OneDark colorscheme and Space as the leader key.
 
+![Neovim configuration during a Rust debugging session](.images/01.png)
+
 ## Language Tooling
 
 | Language/area | Language support and tools |
